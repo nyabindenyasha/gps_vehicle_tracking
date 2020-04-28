@@ -3,6 +3,7 @@ package com.minimum.contrroller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -93,9 +94,9 @@ public class RfidEkombiKombiTrackerController {
 
 	@ApiOperation(value = "", response = Iterable.class)
 	@GetMapping("{id}")
-	public ResponseEntity<RfidEkombiKombiTracker> findOne(@PathVariable int id) {
-		RfidEkombiKombiTracker kombiTracker = kombiTrackerService.findOne(id);
-		if (kombiTracker == null)
+	public ResponseEntity<Optional<RfidEkombiKombiTracker>> findOne(@PathVariable int id) {
+		Optional<RfidEkombiKombiTracker> kombiTracker = kombiTrackerService.findOne(id);
+		if (!kombiTracker.isPresent())
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok().body(kombiTracker);
 	}

@@ -1,6 +1,7 @@
 package com.minimum.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class RfidEkombiKombiTrackerService {
 		return (List<RfidEkombiKombiTracker>) rfidEkombiKombiTrackerRepository.findAll();
 	}
 
-	public RfidEkombiKombiTracker findOne(int id) {
-		return rfidEkombiKombiTrackerRepository.findOne(id);
+	public Optional<RfidEkombiKombiTracker> findOne(int id) {
+		return rfidEkombiKombiTrackerRepository.findById(id);
 	}
 
 	public RfidEkombiKombiTracker saveR(RfidEkombiKombiTracker rfidEkombiKombiTracker) {
@@ -31,7 +32,7 @@ public class RfidEkombiKombiTrackerService {
 	}
 
 	public void delete(int id) {
-		rfidEkombiKombiTrackerRepository.delete(id);
+		rfidEkombiKombiTrackerRepository.deleteById(id);
 	}
 
 }
