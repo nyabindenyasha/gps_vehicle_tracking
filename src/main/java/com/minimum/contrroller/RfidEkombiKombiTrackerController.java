@@ -1,5 +1,7 @@
 package com.minimum.contrroller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +57,9 @@ public class RfidEkombiKombiTrackerController {
 		ActionResult result = new ActionResult();
 		try {
 			RfidEkombiKombiTracker rfidEkombiKombiTracker = new RfidEkombiKombiTracker();
-			rfidEkombiKombiTracker.setTime(new Date());
+			LocalDateTime ldt = convertToLocalDateTime(new Date()).plusHours(2);
+			Date date = convertToDateViaInstant(ldt);
+			rfidEkombiKombiTracker.setTime(date);
 			rfidEkombiKombiTracker.setCurrentLocationLatitude(latitude);
 			rfidEkombiKombiTracker.setCurrentLocationLongitude(longitude);
 			rfidEkombiKombiTracker.setVehicleId(kombiId);
@@ -112,6 +116,14 @@ public class RfidEkombiKombiTrackerController {
 		}
 		result.setMessage("Cannot delete the RfidEkombiKombiTracker");
 		return new ResponseEntity<ActionResult>(result, HttpStatus.BAD_REQUEST);
+	}
+	
+	Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+		return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	LocalDateTime convertToLocalDateTime(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
 }
