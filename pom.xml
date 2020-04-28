@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.minimum.vehicle</groupId>
-	<artifactId>vehicle_gps_tracking</artifactId>
+	<artifactId>vehicle_gps_tracking_src</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vehicle_gps_tracking</name>
 	<description>Demo project for Spring Boot</description>
@@ -51,17 +51,20 @@
 			<version>5.0.1.Final</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>com.microsoft.sqlserver</groupId> <artifactId>sqljdbc6</artifactId> 
-			<version>4.2</version> </dependency> -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc6</artifactId>
+			<version>4.2</version>
+		</dependency>
 
-<!-- 		 <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
-			</dependency>  -->
+		<!-- <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
+			</dependency> -->
 
-	 	<dependency>
+		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<scope>runtime</scope>
-		</dependency> 
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.uuid</groupId>
