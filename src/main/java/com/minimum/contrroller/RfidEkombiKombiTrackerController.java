@@ -50,6 +50,11 @@ public class RfidEkombiKombiTrackerController {
 			return new ResponseEntity<ActionResult>(result, HttpStatus.BAD_GATEWAY);
 		}
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "test auto deploy";
+	}
 
 	@GetMapping("/querry")
 	public ResponseEntity<ActionResult> saveUsingQuerry(@RequestParam("vehicleId") int kombiId,
