@@ -102,6 +102,36 @@ public class RfidEkombiKombiTrackerController {
 	}
 
 	@ApiOperation(value = "", response = Iterable.class)
+	@GetMapping("findRecordByVehicleId/{vehicleId}")
+	public ResponseEntity<Iterable<VehicleResponse>> findRecordByVehicleId(@PathVariable int vehicleId) {
+		try {
+			Iterable<RfidEkombiKombiTracker> rfidEkombiKombiTrackerList = kombiTrackerService.findAll();
+			List<VehicleResponse> vehicleResponseView = new ArrayList<>();
+			List<RfidEkombiKombiTracker> vehiclesWithvehicleId = new ArrayList<>();
+
+			for (RfidEkombiKombiTracker x : rfidEkombiKombiTrackerList) {
+				if(x.getVehicleId() == vehicleId)
+					vehiclesWithvehicleId.add(x);
+			}
+
+			for (RfidEkombiKombiTracker rfidEkombiKombiTrackerTemp : vehiclesWithvehicleId) {
+				VehicleResponse vehicleResponse = new VehicleResponse();
+				vehicleResponse.setId(rfidEkombiKombiTrackerTemp.getId());
+				vehicleResponse.setCurrentLocationLatitude(rfidEkombiKombiTrackerTemp.getCurrentLocationLatitude());
+				vehicleResponse.setCurrentLocationLongitude(rfidEkombiKombiTrackerTemp.getCurrentLocationLongitude());
+				vehicleResponse.setTime(rfidEkombiKombiTrackerTemp.getTime().toString());
+				vehicleResponse.setVehicleId(rfidEkombiKombiTrackerTemp.getVehicleId());
+				vehicleResponseView.add(vehicleResponse);
+			}
+
+			return ResponseEntity.ok().body(vehicleResponseView);
+		} catch (Exception exception) {
+			Iterable<VehicleResponse> iterable = null;
+			return new ResponseEntity<Iterable<VehicleResponse>>(iterable, HttpStatus.BAD_GATEWAY);
+		}
+	}
+
+	@ApiOperation(value = "", response = Iterable.class)
 	@GetMapping("{id}")
 	public ResponseEntity<Optional<RfidEkombiKombiTracker>> findOne(@PathVariable int id) {
 		Optional<RfidEkombiKombiTracker> kombiTracker = kombiTrackerService.findOne(id);
